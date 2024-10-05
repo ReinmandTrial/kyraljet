@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
+const config = defineNuxtConfig({
+  buildModules: ['@nuxtjs/svg-sprite'],
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   modules: [
@@ -15,3 +16,4 @@ export default defineNuxtConfig({
     ],
   ],
 })
+export default config
