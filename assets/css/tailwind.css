@@ -7,3 +7,6 @@
     @apply font-nunito;
   }
 }
+.icons {
+  @apply w-6 h-6;
+}
