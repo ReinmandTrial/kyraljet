@@ -15,5 +15,6 @@ const config = defineNuxtConfig({
     ],
     '@nuxtjs/svg-sprite',
   ],
+  plugins: ['~/plugins/click-outside'],
 })
 export default config

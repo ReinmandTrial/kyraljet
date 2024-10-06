@@ -57,20 +57,24 @@ export default {
       8: '0.08',
     },
     fontSize: {
-      h1: ['3.125rem', { letterSpacing: '0em' }],
-      h2: ['2.375rem', { letterSpacing: '0em' }],
-      h3: ['1.75rem', { letterSpacing: '0em' }],
-      h4: ['1.3125rem', { letterSpacing: '0em' }],
-      h5: ['0.75rem', { letterSpacing: '0.08' }],
-      p: ['1rem', { letterSpacing: '0em' }],
-      s: ['0.75rem', { letterSpacing: '0em' }],
-      p2: ['0.875rem', { letterSpacing: '0em' }],
-      b: ['0.9375rem', { letterSpacing: '0.08' }],
+      h1: ['3.125rem', { letterSpacing: '0em', fontWeight: 500 }],
+      h2: ['2.375rem', { letterSpacing: '0em', fontWeight: 500 }],
+      h3: ['1.75rem', { letterSpacing: '0em', fontWeight: 400 }],
+      h4: ['1.3125rem', { letterSpacing: '0em', fontWeight: 400 }],
+      h5: ['0.75rem', { letterSpacing: '0.08', fontWeight: 500 }],
+      p: ['1rem', { letterSpacing: '0em', fontWeight: 400 }],
+      s: ['0.75rem', { letterSpacing: '0em', fontWeight: 400 }],
+      p2: ['0.875rem', { letterSpacing: '0em', fontWeight: 400 }],
+      b: ['0.9375rem', { letterSpacing: '0.08', fontWeight: 500 }],
     },
     extend: {
       fontFamily: {
         nunito: ['"Nunito"'],
         jost: ['"Jost"'],
+      },
+      boxShadow: {
+        DEFAULT:
+          '0px 4px 4px -4px rgba(12, 12, 13, 0.05), 0px 16px 16px -8px rgba(12, 12, 13, 0.1)',
       },
     },
   },
