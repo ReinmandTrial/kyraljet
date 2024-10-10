@@ -8,7 +8,7 @@ const config = defineNuxtConfig({
       '@nuxtjs/google-fonts',
       {
         families: {
-          Jost: [400, 500],
+          Jost: [400, 500, 600],
           Nunito: [400],
         },
       },

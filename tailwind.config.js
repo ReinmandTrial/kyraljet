@@ -39,11 +39,13 @@ export default {
         DEFAULT: '#DAA520',
         200: '#FBEECDB2',
         300: '#FBEECD',
+        500: '#BA8D1E',
       },
       red: {
         default: '#F03D3E',
         200: '#FF3B30',
         300: '',
+        500: '#5F3314',
         600: '',
         700: '#D84910',
       },

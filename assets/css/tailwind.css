@@ -6,6 +6,10 @@
   html {
     @apply font-nunito;
   }
+  html,
+  body {
+    @apply h-full;
+  }
 }
 .icons {
   @apply w-6 h-6;
