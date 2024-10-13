@@ -1,6 +1,6 @@
 <template>
   <header
-    class="flex items-center justify-between rounded-b-lg rounded-bl-lg bg-orange px-4 py-2.5 text-white lg:p-8"
+    class="flex items-center justify-between rounded-b-lg rounded-bl-lg bg-orange px-4 py-2.5 text-white lg:p-8 z-[300]"
   >
     <NuxtLink :to="{ name: 'index' }" class="flex items-center gap-2 font-jost text-h4 lg:text-h3">
       <SvgIcon class="lg:h-10 lg:w-10" name="logo" />
