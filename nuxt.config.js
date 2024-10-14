@@ -13,12 +13,10 @@ const config = defineNuxtConfig({
         },
       },
     ],
-    [
-      '@nuxtjs/svg-sprite',
-      {
-        publicPath: '/_nuxt/',
-      },
-    ],
+    '@nuxtjs/svg-sprite',
+  ],
+  buildModules: [
+    '@nuxtjs/svg-sprite',
   ],
   plugins: ['~/plugins/click-outside'],
 })
