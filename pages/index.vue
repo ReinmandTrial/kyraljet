@@ -12,7 +12,7 @@
 
   <div class="">
     <CommonContainer class="flex flex-col">
-      <div class="order-1 mb-[4.375rem] flex">
+      <div class="order-1 mb-[4.375rem] flex lg:gap-6">
         <PagesHomeCurrentRent class="w-[20.5rem]" />
         <PagesHomeCategoriesShort class="hidden flex-auto lg:block" />
       </div>
