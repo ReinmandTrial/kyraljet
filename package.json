@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@fawmi/vue-google-maps": "^0.9.67",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/svg-sprite": "^1.0.2",
     "autoprefixer": "^10.4.20",
