@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const config = defineNuxtConfig({
+  devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
     [
