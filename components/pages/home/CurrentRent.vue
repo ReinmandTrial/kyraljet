@@ -10,7 +10,7 @@
             <div
               class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-gray-300"
             >
-              <SvgIcon name="calendar" />
+              <IconCalendar class="!h-6 !w-6" />
             </div>
             <div class="mx-auto mt-2 w-0 flex-auto border-l border-dashed border-gray-300"></div>
           </div>
@@ -27,7 +27,7 @@
             <div
               class="flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full bg-orange-300 text-orange"
             >
-              <SvgIcon name="key" />
+              <IconKey class="!h-6 !w-6" />
             </div>
             <div class="mx-auto mt-2 w-0 flex-auto border-l border-dashed border-gray-300"></div>
           </div>
@@ -40,7 +40,7 @@
             <div
               class="flex h-9 w-9 items-center justify-center rounded-full bg-orange-300 text-orange"
             >
-              <SvgIcon name="calendar" />
+              <IconCalendar class="!h-6 !w-6" />
             </div>
           </div>
           <div class="pt-2">

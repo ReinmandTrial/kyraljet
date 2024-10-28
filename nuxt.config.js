@@ -1,7 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const config = defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
-  devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
     [
@@ -13,11 +11,13 @@ const config = defineNuxtConfig({
         },
       },
     ],
-    '@nuxtjs/svg-sprite',
+    'nuxt-svgo',
   ],
-  buildModules: [
-    '@nuxtjs/svg-sprite',
-  ],
+  svgo: {
+    svgo: true,
+    autoImportPath: '~/assets/icons/',
+    componentPrefix: 'icon',
+  },
   plugins: ['~/plugins/click-outside'],
 })
 export default config
