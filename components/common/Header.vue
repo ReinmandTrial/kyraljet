@@ -1,6 +1,6 @@
 <template>
   <header
-    class="flex items-center justify-between rounded-b-lg rounded-bl-lg bg-orange px-4 py-2.5 text-white lg:p-8 z-[300]"
+    class="z-[300] flex items-center justify-between rounded-b-lg rounded-bl-lg bg-orange px-4 py-2.5 text-white lg:p-8"
   >
     <NuxtLink :to="{ name: 'index' }" class="flex items-center gap-2 font-jost text-h4 lg:text-h3">
       <IconLogo class="lg:h-10 lg:w-10" />
@@ -8,10 +8,10 @@
     </NuxtLink>
 
     <div class="flex items-center gap-4">
-      <UiButton color-type="brown" class="hidden lg:flex px-7">Сдать в аренду</UiButton>
+      <UiButton color-type="brown" class="hidden px-7 lg:flex">Сдать в аренду</UiButton>
       <div class="relative" v-out="() => (profile_open = false)">
         <button class="flex" @click="profile_open = !profile_open">
-          <IconPerson class="!w-8 !h-8" />
+          <IconPerson class="!h-6 !w-6 lg:!h-8 lg:!w-8" />
         </button>
         <div
           v-if="profile_open"
