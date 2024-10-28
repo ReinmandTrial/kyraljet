@@ -14,3 +14,7 @@
 .icons {
   @apply w-6 h-6;
 }
+
+.nuxt-icon {
+  @apply !m-0;
+}
