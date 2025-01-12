@@ -6,6 +6,7 @@
     </div>
     <CommonFooter />
   </div>
+  <AuthLayout />
 </template>
 
 <script>

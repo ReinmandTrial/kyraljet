@@ -63,7 +63,7 @@ export default {
       h2: ['2.375rem', { letterSpacing: '0em', fontWeight: 500 }],
       h3: ['1.75rem', { letterSpacing: '0em', fontWeight: 400 }],
       h4: ['1.3125rem', { letterSpacing: '0em', fontWeight: 400 }],
-      h5: ['0.75rem', { letterSpacing: '0.08', fontWeight: 500 }],
+      h5: ['0.75rem', { letterSpacing: '0.08', fontWeight: 400 }],
       p: ['1rem', { letterSpacing: '0em', fontWeight: 400 }],
       s: ['0.75rem', { letterSpacing: '0em', fontWeight: 400 }],
       p2: ['0.875rem', { letterSpacing: '0em', fontWeight: 400 }],

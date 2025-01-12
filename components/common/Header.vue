@@ -17,8 +17,18 @@
           v-if="profile_open"
           class="absolute right-0 top-[calc(100%+0.5rem)] rounded-lg bg-white py-2 shadow lg:top-[calc(100%+1.5rem)]"
         >
-          <NuxtLink class="block px-4 py-2 text-right text-p text-gray">Войти</NuxtLink>
-          <NuxtLink class="block px-4 py-2 text-right text-p text-gray">
+          <NuxtLink
+            :to="{ params: { ...$route.params }, query: { ...$route.query, sign_in: true } }"
+            class="block px-4 py-2 text-right text-p text-gray"
+            @click="profile_open = false"
+          >
+            Войти
+          </NuxtLink>
+          <NuxtLink
+            :to="{ params: { ...$route.params }, query: { ...$route.query, sign_up: true } }"
+            class="block px-4 py-2 text-right text-p text-gray"
+            @click="profile_open = false"
+          >
             Зарегистрироваться
           </NuxtLink>
         </div>

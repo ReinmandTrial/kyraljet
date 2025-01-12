@@ -1,0 +1,17 @@
+<template>
+  <CommonContainer class="pb-14 pt-5 lg:pb-24 lg:pt-10">
+    <h1 class="mb-7 font-jost text-h4 lg:mb-8 lg:text-h3">Мои данные</h1>
+    <div class="max-w-[27.875rem]">
+      <UiInput class="mb-6" label="Имя"  value="Анатолий"/>
+      <UiInput class="mb-6" label="Фамилия"  value="Нурзунбаев"/>
+      <UiInput class="mb-6" label="Почта"  value="Malito@gmail.com"/>
+      <UiInput class="mb-6" label="Номер телефона"  value="+380 48974784"/>
+    </div>
+  </CommonContainer>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style lang="scss" scoped></style>

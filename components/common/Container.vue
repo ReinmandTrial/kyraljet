@@ -1,11 +1,23 @@
 <template>
-  <div class="lg:px24 mx-auto w-full max-w-[82.75rem] px-4 md:px-12">
+  <div
+    class="lg:px24 mx-auto w-full px-4 md:px-12"
+    :style="{
+      maxWidth,
+    }"
+  >
     <slot />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    maxWidth: {
+      type: String,
+      default: '1324px',
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

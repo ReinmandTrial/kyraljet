@@ -11,6 +11,7 @@
       },
     ]"
     v-bind="bindAttrs"
+    @click="$emit('click')"
   >
     <template v-if="loading">
       <span class="loader"></span> {{ awaitLabel || 'Подождите' }}
@@ -20,7 +21,11 @@
 </template>
 
 <script>
+import { NuxtLink } from '#components'
+
 export default {
+  emits: ['click'],
+  components: { NuxtLink },
   props: {
     to: {},
     href: {
