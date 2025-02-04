@@ -4,7 +4,7 @@
   >
     <CommonContainer>
       <div>
-        <UxSearchDesktop class="max-w-[49rem] mx-auto" />
+        <UxSearchDesktop class="mx-auto max-w-[49rem]" />
         <UxSearchMobile class="" />
       </div>
     </CommonContainer>
@@ -17,7 +17,7 @@
         <PagesHomeCategoriesShort class="hidden flex-auto lg:block" />
       </div>
       <PagesHomeDownloadApp class="order-2 mb-[4.375rem] lg:order-3" />
-      <PagesHomeCategories class="order-3 mb-[4.375rem] lg:order-2 lg:mb-[7.5rem]" />
+      <!-- <PagesHomeCategories class="order-3 mb-[4.375rem] lg:order-2 lg:mb-[7.5rem]" /> -->
       <PagesHomePartners class="order-4 mb-[7.5rem]" />
     </CommonContainer>
   </div>

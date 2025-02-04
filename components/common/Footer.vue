@@ -35,10 +35,10 @@
       <div>
         <h3 class="mb-4 text-h4 text-gray-100">Информация</h3>
         <div>
-          <NuxtLink :to="{}" class="mb-2 block text-p text-gray-100 last:mb-0">
+          <NuxtLink :to="{ path: '/' }" class="mb-2 block text-p text-gray-100 last:mb-0">
             Политика конфиденциальности
           </NuxtLink>
-          <NuxtLink :to="{}" class="mb-2 block text-p text-gray-100 last:mb-0">
+          <NuxtLink :to="{ path: '/' }" class="mb-2 block text-p text-gray-100 last:mb-0">
             Пользовательские соглашения
           </NuxtLink>
         </div>

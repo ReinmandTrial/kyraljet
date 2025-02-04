@@ -15,22 +15,43 @@
         </button>
         <div
           v-if="profile_open"
-          class="absolute right-0 top-[calc(100%+0.5rem)] rounded-lg bg-white py-2 shadow lg:top-[calc(100%+1.5rem)]"
+          class="absolute right-0 top-[calc(100%+0.5rem)] min-w-[14rem] rounded-lg bg-white py-2 shadow lg:top-[calc(100%+1.5rem)]"
         >
-          <NuxtLink
-            :to="{ params: { ...$route.params }, query: { ...$route.query, sign_in: true } }"
-            class="block px-4 py-2 text-right text-p text-gray"
-            @click="profile_open = false"
-          >
-            Войти
-          </NuxtLink>
-          <NuxtLink
-            :to="{ params: { ...$route.params }, query: { ...$route.query, sign_up: true } }"
-            class="block px-4 py-2 text-right text-p text-gray"
-            @click="profile_open = false"
-          >
-            Зарегистрироваться
-          </NuxtLink>
+          <template v-if="!user">
+            <NuxtLink
+              :to="{ params: { ...$route.params }, query: { ...$route.query, sign_in: true } }"
+              class="block px-4 py-2 text-right text-p text-gray"
+              @click="profile_open = false"
+            >
+              Войти
+            </NuxtLink>
+            <NuxtLink
+              :to="{ params: { ...$route.params }, query: { ...$route.query, sign_up: true } }"
+              class="block px-4 py-2 text-right text-p text-gray"
+              @click="profile_open = false"
+            >
+              Зарегистрироваться
+            </NuxtLink>
+          </template>
+          <template v-else>
+            <NuxtLink
+              :to="{ name: 'profile' }"
+              class="block px-4 py-2 text-right text-p text-gray"
+              @click="profile_open = false"
+            >
+              Профиль
+            </NuxtLink>
+            <NuxtLink
+              :to="{ name: 'profile-orders' }"
+              class="block px-4 py-2 text-right text-p text-gray"
+              @click="profile_open = false"
+            >
+              Заказы
+            </NuxtLink>
+            <button class="block px-4 py-2 text-right text-p text-gray w-full" @click="signOut">
+              Выйти
+            </button>
+          </template>
         </div>
       </div>
     </div>
@@ -43,6 +64,21 @@ export default {
     return {
       profile_open: false,
     }
+  },
+  computed: {
+    user() {
+      return useAuthStore().user
+    },
+  },
+  methods: {
+    signOut() {
+      const access = useCookie('client_access')
+      const refresh = useCookie('client_refresh')
+
+      access.value = undefined
+      refresh.value = undefined
+      window.location.reload()
+    },
   },
 }
 </script>

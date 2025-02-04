@@ -15,7 +15,7 @@
       >
         <div class="mb-5">
           <div class="mb-5 flex items-center justify-center gap-2">
-            <button class="flex p-1" @click="$emit('back')">
+            <button class="flex p-1">
               <IconTriangleLeft class="!h-6 !w-6 text-gray-400" />
             </button>
             <h1 class="text-center font-jost text-h3 lg:text-h4">Шаг 2. Подтвердите Email</h1>
@@ -51,17 +51,7 @@
         <form class="flex flex-auto flex-col">
           <div class="my-auto">
             <div class="mb-4">
-              <VOtpInput
-                ref="otpInput"
-                input-classes="otp-input"
-                :conditionalClass="['one', 'two', 'three', 'four', 'five', 'six']"
-                inputType="letter-numeric"
-                :num-inputs="6"
-                v-model:value="bindValue"
-                :should-auto-focus="true"
-                :should-focus-order="true"
-                @on-complete="handleOnComplete"
-              />
+              <UiOtp :error="error" v-model:value="code" @on-complete="onComplete" />
             </div>
             <button
               type="button"
@@ -72,7 +62,9 @@
             </button>
           </div>
           <div class="mt-5">
-            <UiButton class="w-full justify-center" @click="onSubmit">Далее</UiButton>
+            <UiButton class="w-full justify-center" :loading="loading" @click="onSubmit">
+              Далее
+            </UiButton>
           </div>
         </form>
       </div>
@@ -81,16 +73,43 @@
 </template>
 
 <script>
-import VOtpInput from 'vue3-otp-input'
-
 export default {
   emits: ['back', 'next', 'close'],
-  components: {
-    VOtpInput,
+  props: {
+    email: {
+      type: String,
+    },
+  },
+  data() {
+    return {
+      code: '',
+      loading: false,
+      error: false,
+    }
   },
   methods: {
     onSubmit() {
-      this.$emit('next')
+      this.onComplete(this.code)
+    },
+    async onComplete(code) {
+      this.error = false
+      this.loading = true
+
+      await $fetch('https://kuraljet.pp.ua/auth/signup/verify_code', {
+        method: 'POST',
+        body: {
+          email: this.email,
+          code,
+        },
+      })
+        .then(() => {
+          this.$emit('next')
+        })
+        .catch(() => {
+          this.error = true
+        })
+
+      this.loading = false
     },
   },
 }
@@ -99,11 +118,5 @@ export default {
 <style lang="scss" scoped>
 :deep(.popup__content) {
   @apply flex flex-col p-0;
-}
-:deep(.otp-input-container) {
-  @apply gap-4;
-}
-:deep(.otp-input) {
-  @apply h-10 w-10 appearance-none rounded border border-gray-200 text-center font-jost text-h4 outline-none;
 }
 </style>

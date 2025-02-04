@@ -1,6 +1,6 @@
 <template>
   <div
-    class="lg:px24 mx-auto w-full px-4 md:px-12"
+    class="lg:px-24 mx-auto w-full px-4 md:px-12"
     :style="{
       maxWidth,
     }"

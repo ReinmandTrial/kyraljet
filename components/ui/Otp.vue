@@ -1,83 +1,44 @@
 <template>
   <VOtpInput
-    class="otp"
+    :class="{ error }"
+    input-classes="otp-input"
+    inputType="numeric"
+    :num-inputs="6"
+    :should-auto-focus="true"
+    :should-focus-order="true"
     :value="value"
-    type="number"
-    :error="error"
-    @input="val => $emit('input:value', val)"
-    @finish="$emit('finish')"
-  ></VOtpInput>
+    @update:value="v => $emit('update:value', v)"
+    @on-complete="v => $emit('on-complete', v)"
+  />
 </template>
 
 <script>
+import VOtpInput from 'vue3-otp-input'
+
 export default {
+  components: {
+    VOtpInput,
+  },
+  emits: ['update:value', 'on-complete'],
   props: {
-    length: {
-      type: Number,
-      default: 6,
-    },
     value: {
       default: '',
     },
-    error: {},
+    error: {
+      type: Boolean,
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.otp {
-  flex: none;
-  flex-wrap: nowrap;
-  gap: 12px;
-  margin: 0;
-  justify-content: space-between;
-  @media (max-width: 575.98px) {
-    gap: 5px;
-  }
-  :deep(*) {
-    border: none !important;
-    outline: none !important;
-  }
-  :deep(.v-input) {
-    flex: 0 0 44px;
-    height: 44px;
-    padding: 0;
-    border-radius: 8px;
-    background: var(--white);
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.09);
-    @media (max-width: 575.98px) {
-      flex: 0 0 35px;
-      height: 35px;
-    }
-  }
-  :deep(.v-input.error--text) {
-    box-shadow: 0px 0px 5px 0px rgba(255, 0, 0, 0.4);
-  }
-
-  :deep(.v-input--is-focused) {
-    box-shadow: 0px 0px 5px 0px rgba(250, 174, 43, 0.4) !important;
-  }
-
-  :deep(.v-input__control) {
-    height: 100%;
-  }
-  :deep(.v-input__slot) {
-    height: 100%;
-    min-height: auto;
-    margin: 0;
-  }
-  :deep(.v-text-field__slot) {
-    height: 100%;
-  }
-
-  :deep(.v-input input) {
-    max-height: none;
-    height: 100%;
-    color: var(--black1);
-    font-family: 'Lato';
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.25px;
-  }
+.otp-input-container {
+  @apply justify-center gap-4;
+}
+:deep(.otp-input) {
+  @apply h-10 w-10 appearance-none rounded border border-gray-200 text-center font-jost text-h4 outline-none;
+}
+.error :deep(.otp-input) {
+  @apply border-red-default;
 }
 </style>

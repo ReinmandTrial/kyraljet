@@ -27,8 +27,19 @@
         <form class="flex flex-auto flex-col">
           <div class="my-auto">
             <div class="mb-4">
-              <UiInput class="mb-4" type="email" placeholder="Email" />
-              <UiInput type="password" placeholder="Password" />
+              <UiInput
+                v-model="email"
+                class="mb-4"
+                type="email"
+                placeholder="Email"
+                :error="email_error"
+              />
+              <UiInput
+                v-model="password"
+                type="password"
+                placeholder="Password"
+                :error="password_error"
+              />
             </div>
             <div class="flex justify-between gap-2">
               <NuxtLink
@@ -46,7 +57,8 @@
             </div>
           </div>
           <div class="mt-5">
-            <UiButton class="w-full justify-center">Войти</UiButton>
+            <p v-if="error" class="mb-1 text-p2 text-red-default">{{ error }}</p>
+            <UiButton class="w-full justify-center" @click="onSubmit">Войти</UiButton>
           </div>
         </form>
       </div>
@@ -55,7 +67,68 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      email: '',
+      email_error: false,
+      password: '',
+      password_error: false,
+      error: '',
+    }
+  },
+  methods: {
+    async onSubmit() {
+      this.email_error = false
+      this.password_error = false
+
+      if (!this.email) {
+        this.email_error = true
+        return
+      }
+      if (!this.password) {
+        this.password_error = true
+        return
+      }
+
+      await $fetch('https://kuraljet.pp.ua/auth/login', {
+        method: 'POST',
+        body: {
+          email: this.email,
+          password: this.password,
+        },
+      })
+        .then(({ data }) => {
+          const client_access = useCookie('client_access', {
+            maxAge: 3 * 24 * 60 * 60,
+          })
+          const client_refresh = useCookie('client_refresh', {
+            maxAge: 3 * 24 * 60 * 60,
+          })
+
+          client_access.value = data.token.access
+          client_refresh.value = data.token.refresh
+
+          this.$router
+            .replace({
+              params: {
+                ...this.$route.params,
+              },
+              query: {
+                ...this.$route.query,
+                sign_in_email: undefined,
+              },
+            })
+            .then(() => {
+              window.location.reload()
+            })
+        })
+        .catch(({ data }) => {
+          this.error = data?.message
+        })
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

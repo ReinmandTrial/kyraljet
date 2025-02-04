@@ -51,11 +51,24 @@
         <form class="flex flex-auto flex-col">
           <div class="my-auto">
             <div class="mb-4">
-              <UiInput class="mb-4" type="password" placeholder="Придумайте пароль" />
-              <UiInput class="mb-4" type="password" placeholder="Подтвердите пароль" />
+              <UiInput
+                v-model="password"
+                :error="error1"
+                class="mb-4"
+                type="password"
+                placeholder="Придумайте пароль"
+              />
+              <UiInput
+                v-model="confirm_password"
+                :error="error2"
+                class="mb-4"
+                type="password"
+                placeholder="Подтвердите пароль"
+              />
             </div>
           </div>
           <div class="mt-5">
+            <p v-if="error" class="text-p2 text-red-default mb-1">{{ error }}</p>
             <UiButton class="w-full justify-center" @click="onSubmit">Далее</UiButton>
           </div>
         </form>
@@ -66,10 +79,35 @@
 
 <script>
 export default {
-  emits: ['back', 'next', 'close'],
+  emits: ['back', 'finish', 'close'],
+  props: {
+    error: {
+      type: String,
+    },
+  },
+  data() {
+    return {
+      password: '',
+      error1: false,
+      confirm_password: '',
+      error2: false,
+    }
+  },
   methods: {
     onSubmit() {
-      this.$emit('next')
+      this.error1 = false
+      this.error2 = false
+
+      if (!this.password || !this.confirm_password || this.password !== this.confirm_password) {
+        this.error1 = true
+        this.error2 = true
+        return
+      }
+
+      this.$emit('finish', {
+        password: this.password,
+        confirm_password: this.confirm_password,
+      })
     },
   },
 }

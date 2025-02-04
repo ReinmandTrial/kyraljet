@@ -14,12 +14,14 @@ const config = defineNuxtConfig({
       },
     ],
     'nuxt-svgo',
+    '@pinia/nuxt',
+    '@nuxt/image',
   ],
   svgo: {
     svgo: true,
     autoImportPath: '~/assets/icons/',
     componentPrefix: 'icon',
   },
-  plugins: ['~/plugins/click-outside', '~/plugins/google-maps'],
+  plugins: ['~/plugins/click-outside', '~/plugins/google-maps', '~/plugins/ofetch'],
 })
 export default config
