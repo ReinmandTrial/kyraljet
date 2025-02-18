@@ -17,6 +17,8 @@ definePageMeta({
   middleware: 'auth',
 })
 
+useHead({ title: 'Профиль' })
+
 const authStore = useAuthStore()
 const user = computed(() => authStore.user)
 </script>

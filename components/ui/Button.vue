@@ -1,7 +1,7 @@
 <template>
   <component
     :is="defineTag"
-    class="flex rounded-lg px-12 py-3 text-center font-jost text-b"
+    class="flex rounded-lg px-12 py-3 items-center text-center font-jost text-b"
     :class="[
       colorTypeStyles,
       {

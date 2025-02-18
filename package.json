@@ -24,6 +24,7 @@
     "postcss": "^8.4.47",
     "vue": "latest",
     "vue-router": "latest",
+    "vue-the-mask": "^0.11.1",
     "vue3-otp-input": "^0.5.21"
   },
   "devDependencies": {

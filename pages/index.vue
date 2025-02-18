@@ -24,7 +24,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  created() {
+    useHead({ title: 'Главная' })
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

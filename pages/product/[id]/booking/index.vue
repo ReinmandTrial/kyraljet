@@ -6,27 +6,27 @@
         <div
           class="mb-6 flex max-w-[27.875rem] flex-col gap-4 lg:max-w-none lg:flex-row lg:flex-wrap"
         >
-          <UiInput label="Дата начала аренды" placeholder="01/12/2025" />
-          <UiInput label="Время началы" placeholder="12:00" />
+          <UiInput label="Дата начала аренды" placeholder="22/12/2025" mask="##/##/####" />
+          <UiInput label="Время началы" placeholder="12:00" mask="##:##" />
           <UiInput label="Количество суток" placeholder="3" />
         </div>
-        <div class="flex flex-col items-center gap-4 lg:flex-row lg:gap-10">
+        <div class="flex flex-col lg:items-center gap-4 lg:flex-row lg:gap-10">
           <div class="flex flex-auto items-center gap-4">
             <div class="h-[6.875rem] w-[6.875rem] overflow-hidden rounded-lg">
-              <img class="h-full w-full object-cover" src="" alt="" />
+              <img class="h-full w-full object-cover" :src="tool.photos[0].photo" alt="" />
             </div>
             <div class="">
-              <p class="mb-2 font-jost text-h5 text-gray-300">Code 12345</p>
-              <h4 class="font-jost text-h4 lg:text-h3">Дрель “Makita” 1600 оборотов</h4>
+              <p class="mb-2 font-jost text-h5 text-gray-300">Code {{ tool.id }}</p>
+              <h4 class="font-jost text-h4 lg:text-h3">{{ tool.name }}</h4>
             </div>
           </div>
 
           <div class="flex flex-col">
             <span class="text-s text-gray lg:font-jost lg:text-h5">
-              <span class="text-p2 text-orange lg:text-h4">3 874 38748 73 $</span> /сутки
+              <span class="text-p2 text-orange lg:text-h4">{{ tool.price }} Т</span> /сутки
             </span>
             <span class="text-s text-gray lg:font-jost lg:text-h5">
-              <span class="text-p2 text-orange lg:text-h4">3 874 38748 73 $</span> /неделя
+              <span class="text-p2 text-orange lg:text-h4">{{ tool.price * 7 }} Т</span> /неделя
             </span>
           </div>
 
@@ -69,17 +69,22 @@
 </template>
 
 <script>
+import TOOLS from '@/mocks/tools'
 import { useAuthStore } from '@/stores/auth'
 
 export default {
   data() {
     return {
+      tool: TOOLS.find(t => t.id === Number(this.$route.params.id)),
       amount: 1,
       first_name: '',
       last_name: '',
       email: '',
       phone: '',
     }
+  },
+  created() {
+    useHead({ title: 'Бронирование' })
   },
   mounted() {
     this.first_name = this.user?.profile.first_name || ''

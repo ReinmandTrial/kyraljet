@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const config = defineNuxtConfig({
   devtools: { enabled: true },
-  build: { transpile: ['@fawmi/vue-google-maps'] },
+  build: { transpile: ['@fawmi/vue-google-maps',] },
   modules: [
     '@nuxtjs/tailwindcss',
     [
@@ -22,6 +22,6 @@ const config = defineNuxtConfig({
     autoImportPath: '~/assets/icons/',
     componentPrefix: 'icon',
   },
-  plugins: ['~/plugins/click-outside', '~/plugins/google-maps', '~/plugins/ofetch'],
+  plugins: ['~/plugins/click-outside', '~/plugins/google-maps','~/plugins/mask', '~/plugins/ofetch'],
 })
 export default config

@@ -10,7 +10,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  created() {
+    useHead({ title: 'Заказы' })
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>
