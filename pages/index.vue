@@ -4,8 +4,12 @@
   >
     <CommonContainer>
       <div>
-        <UxSearchDesktop class="mx-auto max-w-[49rem]" />
-        <UxSearchMobile class="" />
+        <!-- <UxSearchDesktop class="mx-auto max-w-[49rem]" /> -->
+        <!-- <UxSearchMobile class="" /> -->
+
+        <UiButton :to="{ name: 'search' }" class="mx-auto w-full max-w-[20rem] justify-center">
+          Поиск
+        </UiButton>
       </div>
     </CommonContainer>
   </div>

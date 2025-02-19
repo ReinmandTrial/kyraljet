@@ -6,11 +6,16 @@
         <div
           class="mb-6 flex max-w-[27.875rem] flex-col gap-4 lg:max-w-none lg:flex-row lg:flex-wrap"
         >
-          <UiInput label="Дата начала аренды" placeholder="22/12/2025" mask="##/##/####" />
-          <UiInput label="Время началы" placeholder="12:00" mask="##:##" />
-          <UiInput label="Количество суток" placeholder="3" />
+          <UiInput
+            v-model="date_start"
+            label="Дата начала аренды"
+            placeholder="22/12/2025"
+            mask="##/##/####"
+          />
+          <UiInput v-model="time_start" label="Время началы" placeholder="12:00" mask="##:##" />
+          <UiInput v-model.number="days" label="Количество суток" placeholder="3" />
         </div>
-        <div class="flex flex-col lg:items-center gap-4 lg:flex-row lg:gap-10">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
           <div class="flex flex-auto items-center gap-4">
             <div class="h-[6.875rem] w-[6.875rem] overflow-hidden rounded-lg">
               <img class="h-full w-full object-cover" :src="tool.photos[0].photo" alt="" />
@@ -46,7 +51,7 @@
             <UiInput class="" label="Номер телефона" v-model="phone" />
           </div>
 
-          <UiButton class="w-full justify-center"> Забронировать </UiButton>
+          <UiButton class="w-full justify-center" @click="onBook"> Забронировать </UiButton>
         </div>
         <div v-else class="max-w-[21rem]">
           <h3 class="mb-8 font-jost text-h3 text-gray">Войти в аккаунт</h3>
@@ -76,12 +81,20 @@ export default {
   data() {
     return {
       tool: TOOLS.find(t => t.id === Number(this.$route.params.id)),
+      date_start: '',
+      time_start: '',
+      days: null,
       amount: 1,
       first_name: '',
       last_name: '',
       email: '',
       phone: '',
     }
+  },
+  computed: {
+    user() {
+      return useAuthStore().user
+    },
   },
   created() {
     useHead({ title: 'Бронирование' })
@@ -92,9 +105,33 @@ export default {
     this.email = this.user?.email || ''
     this.phone = this.user?.profile.phone || ''
   },
-  computed: {
-    user() {
-      return useAuthStore().user
+  methods: {
+    onBook() {
+      const order = {
+        date_start: this.date_start,
+        time_start: this.time_start,
+        days: this.days,
+        amount: this.amount,
+        tool: this.tool,
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email,
+        phone: this.phone,
+        i_took: false,
+        i_gave: false,
+      }
+
+      const storageJson = localStorage.getItem('orders')
+
+      const orders = JSON.parse(storageJson) || []
+
+      order.id = orders.length + 1
+
+      orders.push(order)
+
+      localStorage.setItem('orders', JSON.stringify(orders))
+
+      this.$router.push({ name: 'product-id-booking-success', params: { id: this.tool.id } })
     },
   },
 }

@@ -1,63 +1,60 @@
 <template>
-  <div>
+  <div v-if="currentRentOrders.length">
     <h2 class="mb-6 hidden font-jost text-h3 lg:block">Сейчас в аренде</h2>
-    <div class="rounded-[0.625rem] bg-gray-100 px-4 py-5">
-      <h2 class="mb-2 font-jost text-h4 lg:hidden">Текущая аренда</h2>
-      <p class="mb-4 text-gray">Болгарка “Макита” А34893904</p>
-      <ul class="">
-        <li class="mb-2 flex min-h-20 gap-2 last:mb-0">
-          <div class="flex w-[3.25rem] flex-col items-center">
-            <div
-              class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-gray-300"
-            >
-              <IconCalendar class="!h-6 !w-6" />
-            </div>
-            <div class="mx-auto mt-2 w-0 flex-auto border-l border-dashed border-gray-300"></div>
-          </div>
-          <div class="pt-2">
-            <h3 class="mb-2 text-p2 text-gray">27/09</h3>
-            <label class="flex items-center gap-3 text-gray">
-              <UiToggle disabled checked />
-              Инструмент забрал
-            </label>
-          </div>
-        </li>
-        <li class="mb-2 flex min-h-20 gap-2 last:mb-0">
-          <div class="flex w-[3.25rem] flex-col items-center">
-            <div
-              class="flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full bg-orange-300 text-orange"
-            >
-              <IconKey class="!h-6 !w-6" />
-            </div>
-            <div class="mx-auto mt-2 w-0 flex-auto border-l border-dashed border-gray-300"></div>
-          </div>
-          <div class="pt-4">
-            <h3 class="mb-2 text-p2 text-gray">Время аренды</h3>
-          </div>
-        </li>
-        <li class="mb-2 flex gap-2 last:mb-0">
-          <div class="flex w-[3.25rem] flex-col items-center">
-            <div
-              class="flex h-9 w-9 items-center justify-center rounded-full bg-orange-300 text-orange"
-            >
-              <IconCalendar class="!h-6 !w-6" />
-            </div>
-          </div>
-          <div class="pt-2">
-            <h3 class="mb-2 text-p2 text-gray">27/09</h3>
-            <label class="flex items-center gap-3 text-gray">
-              <UiToggle />
-              Инструмент отдал
-            </label>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <PagesHomeCurrentRentItem
+      v-for="order in currentRentOrders"
+      :key="order.id"
+      :order="order"
+      @on-i-took="v => onITook(order, v)"
+      @on-i-gave="v => onIGave(order, v)"
+    />
   </div>
 </template>
 
 <script>
-export default {}
+import { isWithinInterval, addDays } from 'date-fns'
+
+export default {
+  data() {
+    return {
+      orders: [],
+      loading: true,
+    }
+  },
+  computed: {
+    currentRentOrders() {
+      return this.orders.filter(order => {
+        const today = new Date()
+
+        const start = new Date(order.date_start.split('/').reverse())
+        const end = addDays(start, order.days)
+
+        return isWithinInterval(today, { start: start, end: end })
+      })
+    },
+  },
+  mounted() {
+    const storageJson = localStorage.getItem('orders')
+
+    const orders = JSON.parse(storageJson) || []
+
+    this.orders = orders
+
+    this.loading = false
+  },
+  methods: {
+    onITook(order, value) {
+      order.i_took = value
+
+      localStorage.setItem('orders', JSON.stringify(this.orders))
+    },
+    onIGave(order, value) {
+      order.i_gave = value
+
+      localStorage.setItem('orders', JSON.stringify(this.orders))
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

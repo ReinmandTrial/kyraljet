@@ -3,9 +3,9 @@
     <input
       type="checkbox"
       class="peer h-7 w-7 cursor-pointer appearance-none rounded border border-gray-200 transition-all checked:border-orange checked:bg-orange disabled:cursor-default disabled:border-gray-200 disabled:bg-gray-200 disabled:text-gray-200"
-      :value="value"
+      :checked="modelValue"
       :disabled="disabled"
-      @change="$emit('change', $event.target.value)"
+      @change="$emit('update:modelValue', $event.target.checked)"
     />
     <span
       class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-white opacity-0 peer-checked:opacity-100 peer-disabled:text-gray-200"
@@ -17,9 +17,9 @@
 
 <script>
 export default {
-  emits: ['change'],
+  emits: ['update:modelValue'],
   props: {
-    value: {
+    modelValue: {
       type: Boolean,
     },
     disabled: {
