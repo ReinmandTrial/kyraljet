@@ -6,21 +6,58 @@
         'hidden lg:block': !map.open,
       }"
     >
-      <GMapMap
+      <GoogleMap
         class="h-[80dvh] flex-auto lg:h-full"
+        api-key="AIzaSyAws20Ca3pW11AIWQP2WxH7GsricJjK7IA"
         :center="map.center"
         :zoom="12"
-        :options="map.options"
+        v-bind="{ ...map.options }"
       >
-        <GMapMarker
+        <CustomMarker
           v-for="(marker, index) in tools"
           :key="index"
-          :position="{ lat: marker.latitude, lng: marker.longitude }"
-          :clickable="true"
-          @click="onClickMarker(marker)"
+          :options="{
+            position: { lat: marker.latitude, lng: marker.longitude },
+            anchorPoint: 'CENTER',
+            zIndex: marker.open ? 1000 : 10,
+          }"
         >
-        </GMapMarker>
-      </GMapMap>
+          <div class="relative">
+            <!-- @click="onClickMarker(marker)" -->
+            <div class="" @click="marker.open = !marker.open">
+              <img src="@/assets/images/search/mark.png" class="relative z-10" />
+              <img
+                :src="marker.photos[0].photo"
+                class="absolute left-1/2 top-1/2 h-[45px] w-[30px] -translate-x-1/2 -translate-y-1/2 rounded-lg"
+              />
+            </div>
+            <div
+              v-if="marker.open"
+              class="absolute left-1/2 top-[calc(100%+0.75rem)] z-[1000000] flex h-[7.5rem] w-[22.1875rem] -translate-x-1/2 overflow-hidden rounded-lg bg-orange-300"
+            >
+              <div class="flex flex-auto flex-col p-2">
+                <h3 class="mb-0.5 line-clamp-1 text-p2">{{ marker.name }}</h3>
+                <p class="mb-2 font-jost text-h5">{{ marker.price }} ₸ / сутки</p>
+                <UiButton
+                  :to="{ name: 'product-id', params: { id: marker.id } }"
+                  target="_blank"
+                  color-type="blank"
+                  class="mt-auto w-full justify-center !bg-transparent !p-1"
+                >
+                  Подробнее
+                </UiButton>
+              </div>
+              <div class="w-[7rem] flex-none overflow-hidden rounded-lg">
+                <img
+                  class="h-full w-full rounded-lg object-cover"
+                  :src="marker.photos[0].photo"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </CustomMarker>
+      </GoogleMap>
       <div
         class="absolute left-1/2 top-4 flex w-max -translate-x-1/2 rounded-full border border-gray-300 bg-white lg:hidden"
       >
@@ -59,26 +96,14 @@
       <ul class="flex flex-col gap-4 px-4 pb-8 pt-4 lg:hidden">
         <li v-for="tool in tools" :key="tool.id" class="">
           <CardsToolRow
-            :ref="'card_mobile-' + tool.id"
             :tool="tool"
-            :class="{
-              'rounded-lg border-2 border-gray-300': tool.active,
-              'rounded-lg border-2 border-transparent': !tool.active,
-            }"
-            @click.native="onClickCard(tool)"
           />
         </li>
       </ul>
       <ul class="hidden grid-cols-2 gap-x-4 gap-y-5 px-4 pb-8 pt-4 lg:grid">
         <li v-for="tool in tools" :key="tool.id" class="">
           <CardsToolCol
-            :ref="'card_desktop-' + tool.id"
             :tool="tool"
-            :class="{
-              'rounded-lg border-2 border-gray-300': tool.active,
-              'rounded-lg border-2 border-transparent': !tool.active,
-            }"
-            @click.native="onClickCard(tool)"
           />
         </li>
       </ul>
@@ -105,9 +130,12 @@
 </template>
 
 <script>
+import { GoogleMap, CustomMarker } from 'vue3-google-map'
+
 import TOOLS from '@/mocks/tools'
 
 export default {
+  components: { GoogleMap, CustomMarker },
   data() {
     return {
       map: {
@@ -138,7 +166,7 @@ export default {
           },
         ],
       },
-      tools: TOOLS.map(el => ({ ...el, active: false })),
+      tools: TOOLS.map(el => ({ ...el, open: false })),
     }
   },
   created() {
@@ -159,36 +187,6 @@ export default {
       //   },
       // })
       // console.log('🚀 ~ data:', data)
-    },
-    onClickMarker(marker) {
-      console.log(marker)
-      this.tools.forEach(el => {
-        if (el.id === marker.id) {
-          el.active = true
-        } else {
-          el.active = false
-        }
-      })
-
-      const itemDesktop = this.$refs['card_desktop-' + marker.id][0].$el
-      const itemMobile = this.$refs['card_mobile-' + marker.id][0].$el
-
-      if (window.innerWidth < 1024) {
-        itemMobile.scrollIntoView({ behavior: 'smooth' })
-      } else {
-        itemDesktop.scrollIntoView({ behavior: 'smooth' })
-      }
-    },
-    onClickCard(tool) {
-      this.tools.forEach(el => {
-        if (el.id === tool.id) {
-          el.active = true
-        } else {
-          el.active = false
-        }
-      })
-
-      this.map.center = { lat: tool.latitude, lng: tool.longitude }
     },
   },
 }

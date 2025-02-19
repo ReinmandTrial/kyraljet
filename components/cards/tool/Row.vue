@@ -16,7 +16,7 @@
         {{ tool.city?.name }}
       </div> -->
       <div class="flex items-center justify-between gap-2">
-        <span class="text-h5">{{ tool.price }} Т / сутки</span>
+        <span class="text-h5">{{ tool.price }} ₸ / сутки</span>
         <IconTriangleRight class="!h-5 !w-5 text-orange" />
       </div>
       <!-- <button

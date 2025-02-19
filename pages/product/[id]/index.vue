@@ -23,6 +23,9 @@
       >
         <div
           class="relative row-start-1 row-end-3 overflow-hidden rounded-lg bg-gray-100 lg:col-start-1 lg:col-end-4 lg:row-start-auto lg:row-end-auto lg:h-0 lg:pb-[81%]"
+          :class="{
+            'col-start-1 col-end-3': tool.photos.length === 1,
+          }"
         >
           <img
             class="h-full w-full object-cover lg:absolute lg:inset-0"
@@ -115,10 +118,10 @@
         >
           <div class="flex flex-wrap items-center gap-x-4">
             <span class="text-s text-gray-300 lg:font-jost lg:text-h5 lg:text-gray">
-              <span class="text-p2 text-orange lg:text-h4">{{ tool.price }} T</span> /сутки
+              <span class="text-p2 text-orange lg:text-h4">{{ tool.price }} ₸</span> /сутки
             </span>
             <span class="text-s text-gray-300 lg:font-jost lg:text-h5 lg:text-gray">
-              <span class="text-p2 text-orange lg:text-h4">{{ tool.price * 7 }} T</span> /неделя
+              <span class="text-p2 text-orange lg:text-h4">{{ tool.price * 7 }} ₸</span> /неделя
             </span>
           </div>
           <UiButton

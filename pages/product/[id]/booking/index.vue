@@ -28,10 +28,10 @@
 
           <div class="flex flex-col">
             <span class="text-s text-gray lg:font-jost lg:text-h5">
-              <span class="text-p2 text-orange lg:text-h4">{{ tool.price }} Т</span> /сутки
+              <span class="text-p2 text-orange lg:text-h4">{{ tool.price }} ₸</span> /сутки
             </span>
             <span class="text-s text-gray lg:font-jost lg:text-h5">
-              <span class="text-p2 text-orange lg:text-h4">{{ tool.price * 7 }} Т</span> /неделя
+              <span class="text-p2 text-orange lg:text-h4">{{ tool.price * 7 }} ₸</span> /неделя
             </span>
           </div>
 
@@ -43,7 +43,7 @@
       <div class="">
         <h2 class="mb-8 font-jost text-h2">Личные данные</h2>
 
-        <div v-if="user" class="max-w-[28rem]">
+        <div class="max-w-[28rem]">
           <div class="mb-8 flex flex-col gap-4">
             <UiInput class="" label="Имя" v-model="first_name" />
             <UiInput class="" label="Фамилия" v-model="last_name" />
@@ -53,7 +53,7 @@
 
           <UiButton class="w-full justify-center" @click="onBook"> Забронировать </UiButton>
         </div>
-        <div v-else class="max-w-[21rem]">
+        <!-- <div class="max-w-[21rem]">
           <h3 class="mb-8 font-jost text-h3 text-gray">Войти в аккаунт</h3>
           <div class="">
             <UiButton
@@ -67,7 +67,7 @@
               Войти с помощью Email
             </UiButton>
           </div>
-        </div>
+        </div> -->
       </div>
     </client-only>
   </CommonContainer>
