@@ -8,15 +8,15 @@
         >
           KuralJet
         </NuxtLink>
-        <div class="flex gap-4">
-          <div class="mb-4">
+        <div class="flex gap-4 mb-4">
+          <div class="w-[8.4375rem]">
             <img src="@/assets/images/app-store.png" alt="" />
           </div>
-          <div>
+          <div class="w-[8.4375rem]">
             <img src="@/assets/images/google-play.png" alt="" />
           </div>
         </div>
-        <div>
+        <div class="w-[8.4375rem]">
           <img src="@/assets/images/mastercard-visa.png" alt="" />
         </div>
       </div>

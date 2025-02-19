@@ -1,9 +1,10 @@
 <template>
-  <div v-if="currentRentOrders.length">
+  <div v-if="orders.length">
     <h2 class="mb-6 hidden font-jost text-h3 lg:block">Сейчас в аренде</h2>
     <PagesHomeCurrentRentItem
-      v-for="order in currentRentOrders"
+      v-for="order in orders"
       :key="order.id"
+      class="mb-2"
       :order="order"
       @on-i-took="v => onITook(order, v)"
       @on-i-gave="v => onIGave(order, v)"
